@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Mathecon/Mathecon.vcxproj" Id="9d969851-55e7-4200-9a0d-944051e5f505" />
+</Solution>
