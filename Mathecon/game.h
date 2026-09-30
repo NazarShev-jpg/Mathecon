@@ -4,7 +4,7 @@ struct GameState
 {
     int level;
     int score;
-    int enemyNumber;
+    long long enemyNumber;
     int distance;
 };
 

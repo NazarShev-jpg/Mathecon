@@ -105,7 +105,7 @@ void advanceLevel(GameState& state)
     cout << "\nUroven " << state.level << " proiden! +" << state.distance * 10 << " ochkov.\n\n";
 
     state.level++;
-    state.enemyNumber = 50 + (state.level - 1) * 20;
+    state.enemyNumber = 50LL + (state.level - 1) * 20LL;
     state.distance = 10 + (state.level - 1) * 2;
 }
 
