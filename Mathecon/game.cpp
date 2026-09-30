@@ -2,6 +2,60 @@
 #include <iostream>
 using namespace std;
 
+// ---- Эффекты операций ----
+
+static bool opAdd(int& number, int value)
+{
+    number += value;
+    return true;
+}
+
+static bool opSubtract(int& number, int value)
+{
+    number -= value;
+    return true;
+}
+
+static bool opMultiply(int& number, int value)
+{
+    number *= value;
+    return true;
+}
+
+static bool opDivide(int& number, int value)
+{
+    if (value == 0)
+    {
+        return false;
+    }
+    number /= value;
+    return true;
+}
+
+// ---- Таблица операций: новая операция = новая строка ----
+
+static const Operation operations[] = {
+    // знак, эффект,    сообщение при отказе,                    цена, уровень
+    {'+', opAdd,        nullptr,                                 0,    1},
+    {'-', opSubtract,   nullptr,                                 0,    1},
+    {'*', opMultiply,   nullptr,                                 0,    1},
+    {'/', opDivide,     "Nelzya delit na nol! Hod propushchen.", 0,    1},
+};
+
+static const Operation* findOperation(char symbol)
+{
+    for (const Operation& operation : operations)
+    {
+        if (operation.symbol == symbol)
+        {
+            return &operation;
+        }
+    }
+    return nullptr;
+}
+
+// ---- Состояние игры ----
+
 GameState createInitialState()
 {
     GameState state;
@@ -20,30 +74,17 @@ void printStatus(const GameState& state)
 
 void applyOperation(GameState& state, char op, int value)
 {
-    switch (op)
+    const Operation* operation = findOperation(op);
+
+    if (operation == nullptr)
     {
-    case '+':
-        state.enemyNumber += value;
-        break;
-    case '-':
-        state.enemyNumber -= value;
-        break;
-    case '*':
-        state.enemyNumber *= value;
-        break;
-    case '/':
-        if (value == 0)
-        {
-            cout << "Nelzya delit na nol! Hod propushchen.\n";
-        }
-        else
-        {
-            state.enemyNumber /= value;
-        }
-        break;
-    default:
         cout << "Neizvestnyi znak! Hod propushchen.\n";
-        break;
+        return;
+    }
+
+    if (!operation->apply(state.enemyNumber, value))
+    {
+        cout << operation->failMessage << "\n";
     }
 }
 
