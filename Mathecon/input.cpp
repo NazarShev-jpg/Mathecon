@@ -5,7 +5,7 @@ using namespace std;
 
 ParsedTurn readTurn()
 {
-    cout << "Vvedi znak (+ - * /) i chislo cherez probel: ";
+    cout << "Vvedi znak (+ - * / %) i chislo cherez probel: ";
 
     string line;
     getline(cin, line);

@@ -32,6 +32,16 @@ static bool opDivide(int& number, int value)
     return true;
 }
 
+static bool opModulo(int& number, int value)
+{
+    if (value == 0)
+    {
+        return false;
+    }
+    number %= value;
+    return true;
+}
+
 // ---- Таблица операций: новая операция = новая строка ----
 
 static const Operation operations[] = {
@@ -40,6 +50,7 @@ static const Operation operations[] = {
     {'-', opSubtract,   nullptr,                                 0,    1},
     {'*', opMultiply,   nullptr,                                 0,    1},
     {'/', opDivide,     "Nelzya delit na nol! Hod propushchen.", 0,    1},
+    {'%', opModulo,     "Nelzya delit na nol! Hod propushchen.", 0,    1},
 };
 
 static const Operation* findOperation(char symbol)
